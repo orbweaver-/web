@@ -177,24 +177,38 @@ $(document).ready(function() {
     advancedToggle();
   });
 
-
-  $('#send_to_toggle').on('click', function(e) {
-    e.preventDefault();
-    if ($(this).hasClass('github')) {
-      $(this).text(gettext('Send to ETH Address'));
-      $(this).removeClass('github');
-      $(this).addClass('eth');
-      $('.select2').removeClass('hidden');
-      $('.eth_address').addClass('hidden');
-    } else {
-      $(this).text(gettext('Send to Github User'));
-      $(this).addClass('github');
-      $(this).removeClass('eth');
-      $('.select2').addClass('hidden');
-      $('.eth_address').removeClass('hidden');
-    }
+  $('#send_github_tab').on('click', function(e) {
+    e.preventDefault()
+    if ($(this).hasClass('active')) return;
+    $(this).addClass('active');
+    $('#send_eth_tab').removeClass('active');
+    $('#send_link_tab').removeClass('active');
+    $('#send_github_tab_body').removeClass('hidden');
+    $('#send_eth_tab_body').addClass('hidden');
+    $('#send_link_tab_body').addClass('hidden');
   });
 
+  $('#send_eth_tab').on('click', function(e) {
+    e.preventDefault()
+    if ($(this).hasClass('active')) return;
+    $(this).addClass('active');
+    $('#send_github_tab').removeClass('active');
+    $('#send_link_tab').removeClass('active');
+    $('#send_eth_tab_body').removeClass('hidden');
+    $('#send_github_tab_body').addClass('hidden');
+    $('#send_link_tab_body').addClass('hidden');
+  });
+
+  $('#send_link_tab').on('click', function(e) {
+    e.preventDefault()
+    if ($(this).hasClass('active')) return;
+    $(this).addClass('active');
+    $('#send_github_tab').removeClass('active');
+    $('#send_eth_tab').removeClass('active');
+    $('#send_link_tab_body').removeClass('hidden');
+    $('#send_github_tab_body').addClass('hidden');
+    $('#send_eth_tab_body').addClass('hidden');
+  });
 
   $('#amount').on('keyup blur change', updateEstimate);
   $('#token').on('change', updateEstimate);

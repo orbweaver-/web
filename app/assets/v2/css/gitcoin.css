@@ -564,6 +564,15 @@ div.button-pink {
   padding-left: 15px;
 }
 
+form#send_eth .nav-link {
+  color: black;
+}
+
+form#send_eth .nav-link.active {
+  background-color: #eee;
+  border-bottom: 1px solid #eee;
+}
+
 .dropdown-menu .dropdown-item i {
   text-align: center;
   margin-left: 0px;

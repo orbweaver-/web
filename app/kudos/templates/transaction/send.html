@@ -79,18 +79,41 @@
     <input type="hidden" id="token" value="0x0000000000000000000000000000000000000000">
     <input type="hidden" id="kudosNetwork" value="{{ kudos.contract.network }}">
     <input type="hidden" id="amount" value="{{ kudos.price_in_eth }}">
-    <label for="">{% trans "To:" %} 
-      (<a href="#" id="send_to_toggle" class='eth'>{% trans "Send to ETH Address" %}</a>)
-    </label>
-    <div class="form-group">
-      <select id="username" class="username-search custom-select" {% if not kudos.name  %}disabled{% endif %}></select>
-      <input type="text" placeholder="0x408c49a91e46311ddc35737f8c1aaea6191f36e0" id="to_eth_address" value="" class="form-control eth_address hidden" >
 
+    <div class="form-group">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a id="send_github_tab" class="nav-link active" href="#">{% trans "Github" %}</a>
+        </li>
+        <li class="nav-item">
+          <a id="send_eth_tab" class="nav-link" href="#">{% trans "ETH Address" %}</a>
+        </li>
+        <li class="nav-item">
+          <a id="send_link_tab" class="nav-link" href="#">{% trans "Pasteable Link" %}</a>
+        </li>
+      </ul>
     </div>
+
+    <div class="form-group" id="send_github_tab_body">
+      <label>{% trans "Send to Github User:" %}</label>
+      <select id="username" class="username-search custom-select" {% if not kudos.name  %}disabled{% endif %}></select>
+    </div>
+
+    <div class="form-group hidden" id="send_eth_tab_body">
+      <label>{% trans "Send to ETH Address:" %}</label>
+      <input type="text" placeholder="0x408c49a91e46311ddc35737f8c1aaea6191f36e0" id="to_eth_address" value="" class="form-control eth_address" >
+    </div>
+
+    <div class="form-group hidden" id="send_link_tab_body">
+      <label>{% trans "Send to Pastable Link:" %}</label>
+      <!-- <input type="text" placeholder="0x408c49a91e46311ddc35737f8c1aaea6191f36e0" id="to_eth_address" value="" class="form-control eth_address" > -->
+    </div>
+
     <div class="form-group">
       <label for="">{% trans "From Github Username:" %} {% if not request.user.is_authenticated %}(<a href="{% url 'social:begin' 'github' %}?next=/kudos/send">{% trans "Login" %}</a>) {%endif%}</label>
       <input type="text" placeholder="@username" id="fromName" value="{% if user.is_authenticated  %}{{ user }}{% endif %}" class="form-control" disabled="disabled">
     </div>
+
     <div class="form-group">
       <label for="">{% trans "Related Github Issue URL" %} ({% trans "optional" %}):</label>
       <input type="text" placeholder="https://github.com/user/repo/pull|issues/n" id="issueURL" class="form-control">
